@@ -41,7 +41,7 @@ export default function Menubar() {
               <FiAlignJustify />
             </button>
             <div
-              className={`absolute ${
+              className={`absolute mt-5 ${
                 drop ? "visible opacity-100" : "invisible opacity-0"
               } transition-all duration-500 ease-in-out`}
             >

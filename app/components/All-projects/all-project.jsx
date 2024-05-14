@@ -1,7 +1,36 @@
-import React from "react";
+"use client"
+
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
 export default function All_project() {
+  const [postData, setPostData] = useState([]);
+
+  console.log(postData);
+
+  const getPosts = async () => {
+    try {
+      const res = await fetch("http://localhost:3000/api/posts", {
+        method: "GET",
+        cache: "no-store",
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to fetch posts");
+      }
+
+      const data = await res.json();
+      setPostData(data.posts)
+
+    } catch (error) {
+      console.log("Error loading posts:", error);
+    }
+  };
+
+  useEffect(() => {
+    getPosts();
+  }, [])
+
   return (
     <div className="">
       <div className="flex w-[200px] ">
@@ -12,7 +41,15 @@ export default function All_project() {
           Back to Portfolio
         </Link>
       </div>
-      <div className="pl-10 font-semibold text-3xl pb-20">All projects</div>
+      <div className="flex justify-between px-10 font-semibold text-3xl pb-20">
+        <div>All project</div>
+        <Link
+          href="/pages/create"
+          className=" text-sm shadow-md p-3 rounded-xl bg-green-300 text-white"
+        >
+          Create project
+        </Link>
+      </div>
 
       <div class="px-10 pb-8 grid grid-cols-1 md:grid-cols-2 min-[1120px]:grid-cols-3 gap-16">
         <Link
@@ -167,6 +204,28 @@ export default function All_project() {
             </div>
           </div>
         </Link>
+
+        {postData.map((val) => (
+          <Link key={val._id}
+          href={`/project/${val._id}`}
+          className=" w-full h-[320px] overflow-hidden relative"
+        >
+          <div
+            className="w-full h-full bg-center bg-cover justify-center transition-transform ease-out duration-[1.5s] hover:scale-110"
+            style={{
+              backgroundImage:
+                `url(${val.background})`, // ปรับขนาดตามต้องการ
+            }}
+          >
+            <div className=" h-full w-full opacity-0 text-3xl flex text-white absolute justify-start pl-14 transition ease-out duration-[0.5s] hover:opacity-100">
+              <h1 className="self-center">{val.title}</h1>
+            </div>
+          </div>
+        </Link>
+        ))}
+
+
+
       </div>
     </div>
   );

@@ -67,20 +67,6 @@ export default function Publication() {
           </Link>
         </div>
         <div className="flex flex-col">
-          <div className=" flex flex-col md:flex-row items-center  justify-center pt-6">
-            <iframe
-              width="375"
-              height="247"
-              src="https://www.youtube.com/embed/BYbm6-R-Tgo"
-              title="บ้านและสวน | บ้าน | บ้าน คิด ต่าง"
-            ></iframe>
-            <iframe
-              width="375"
-              height="247"
-              src="https://www.youtube.com/embed/s4oXzDQq5qQ"
-              title="บ้านและสวน | EP.4 | วันที่ 1 มี.ค.63 Full EP"
-            ></iframe>
-          </div>
           <div className=" flex flex-col md:flex-row items-center  justify-center pt-0 md:pt-6">
             <iframe
               width="375"
